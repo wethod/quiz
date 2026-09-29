@@ -10,7 +10,8 @@
 
   // ---------- State ----------
   const blank = () => ({ step: "start", name: "", role: "", client: "", quiz: null, order: null, answers: [], q: 0, result: null });
-  let S = load() || blank();
+  // Unito a blank(): uno stato salvato da una versione precedente non deve lasciare campi mancanti.
+  let S = { ...blank(), ...(load() || {}) };
   let justStamped = false; // true solo subito dopo il timbro, per non mostrare l'avviso "già ritirato"
 
   function load() {
@@ -220,7 +221,14 @@
     // Se si ricarica durante un caricamento, riprende dal punto giusto.
     if (S.step === "loading") S.step = S.quiz != null ? "question" : "form";
     if (S.step === "result" && !S.result) S.step = "start";
-    app.innerHTML = (views[S.step] || viewStart)();
+    try {
+      app.innerHTML = (views[S.step] || viewStart)();
+    } catch (e) {
+      // Stato salvato incompatibile (es. contenuti cambiati): si riparte da capo invece di mostrare una pagina vuota.
+      try { localStorage.removeItem(STORE_KEY); } catch (err) { /* ignore */ }
+      S = blank();
+      app.innerHTML = viewStart();
+    }
     bindLogo();
     if (S.step === "form") {
       const input = document.getElementById("name");
