@@ -5,11 +5,10 @@
   const STORE_KEY = "nonsense-supernova-v1";
   const app = document.getElementById("app");
 
-  const ROLES = ["Founder o management", "PM o account", "Creatività", "Operations o finance", "Altro"];
   const CLIENT = ["Sì, ogni giorno", "Non ancora", "Cos'è wethod?"];
 
   // ---------- State ----------
-  const blank = () => ({ step: "start", name: "", role: "", client: "", quiz: null, order: null, answers: [], q: 0, result: null });
+  const blank = () => ({ step: "start", name: "", client: "", quiz: null, order: null, answers: [], q: 0, result: null });
   let S = load() || blank();
   let justStamped = false; // true solo subito dopo il timbro, per non mostrare l'avviso "già ritirato"
 
@@ -70,7 +69,7 @@
 
   function viewForm() {
     const pills = (list, key) => list.map((v) => `<button type="button" class="pill" data-pill="${key}" data-val="${esc(v)}" aria-pressed="${S[key] === v}">${esc(v)}</button>`).join("");
-    const ok = S.name.trim() && S.role && S.client;
+    const ok = S.name.trim() && S.client;
     return `<section class="screen">
       ${topbar("Accettazione")}
       <h2 style="font-size:30px">Prima la burocrazia. Giuro, è veloce.</h2>
@@ -79,7 +78,6 @@
         <input type="text" id="name" maxlength="30" autocomplete="given-name" value="${esc(S.name)}" placeholder="Nome">
         <small>Serve solo per il referto.</small>
       </div>
-      <div class="field"><span class="label">Di cosa ti occupi?</span><div class="pills">${pills(ROLES, "role")}</div></div>
       <div class="field"><span class="label">Usi già wethod?</span><div class="pills">${pills(CLIENT, "client")}</div></div>
       <div class="actions">
         <button class="btn btn-primary" data-act="toChoice" id="formNext" ${ok ? "" : "disabled"}>Avanti</button>
@@ -149,7 +147,7 @@
       <article class="report" style="${cw(r.k)}">
         <div class="rh">
           <div class="row"><span>Referto n. ${r.num}</span><span>Reparto Agenzie</span></div>
-          <div class="patient">Paziente: <b>${esc(S.name)}</b> · ${esc(S.role)}</div>
+          <div class="patient">Paziente: <b>${esc(S.name)}</b></div>
           <div class="dx">Diagnosi</div>
           <h2><span class="emo" aria-hidden="true">${p.emoji}</span>${esc(p.name)}</h2>
         </div>
@@ -263,7 +261,7 @@
       input.addEventListener("input", () => {
         S.name = input.value;
         save();
-        document.getElementById("formNext").disabled = !(S.name.trim() && S.role && S.client);
+        document.getElementById("formNext").disabled = !(S.name.trim() && S.client);
       });
     }
   }
@@ -276,7 +274,7 @@
       S[el.dataset.pill] = el.dataset.val;
       save();
       el.parentElement.querySelectorAll(".pill").forEach((b) => b.setAttribute("aria-pressed", String(b === el)));
-      document.getElementById("formNext").disabled = !(S.name.trim() && S.role && S.client);
+      document.getElementById("formNext").disabled = !(S.name.trim() && S.client);
       return;
     }
     if (el.dataset.quiz) { startQuiz(el.dataset.quiz); return; }
