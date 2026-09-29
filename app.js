@@ -74,10 +74,10 @@
     return `<section class="screen">
       ${topbar("Accettazione")}
       <h2 style="font-size:30px">Prima la burocrazia. Giuro, è veloce.</h2>
+      <p class="form-note">Servono solo per il referto. Niente newsletter, promesso.</p>
       <div class="field">
         <label for="name">Come ti chiami?</label>
         <input type="text" id="name" maxlength="30" autocomplete="given-name" value="${esc(S.name)}" placeholder="Nome">
-        <small>Serve solo per il referto.</small>
       </div>
       <div class="field"><span class="label">Di cosa ti occupi?</span><div class="pills">${pills(ROLES, "role")}</div></div>
       <div class="field"><span class="label">Usi già wethod?</span><div class="pills">${pills(CLIENT, "client")}</div></div>

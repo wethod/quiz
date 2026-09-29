@@ -63,7 +63,7 @@ button { font: inherit; color: inherit; }
 /* Form */
 .field { display: grid; gap: 8px; }
 .field > label, .field > .label { font-weight: 600; font-size: 16px; }
-.field small { color: var(--ink-2); font-size: 14px; }
+.form-note { color: var(--ink); font-size: 16px; font-weight: 500; }
 input[type="text"] { font: inherit; font-size: 18px; padding: 14px 16px; border: 1.5px solid var(--line); border-radius: 12px; background: var(--card); color: var(--ink); width: 100%; }
 input[type="text"]:focus { border-color: var(--blue); outline: none; }
 .pills { display: flex; flex-wrap: wrap; gap: 8px; }
