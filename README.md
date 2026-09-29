@@ -34,7 +34,7 @@ Per puntare a un altro indirizzo: `cartello.html?url=https://...` o il campo in 
 
 ## Allo stand
 
-1. La persona inquadra il QR, compila nome e se usa wethod, sceglie uno dei 4 quiz.
+1. La persona inquadra il QR, compila nome, ruolo e se usa wethod, sceglie uno dei 4 quiz.
 2. Dopo 6 domande riceve il referto con la terapia (il gadget).
 3. Al banco si tocca **"Terapia ritirata. Timbra il referto"**. Il referto diventa "Ritirato"
    e resta così anche se si ricarica la pagina o si riapre il link.
