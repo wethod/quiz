@@ -135,10 +135,7 @@
   function viewResult() {
     const r = S.result;
     const p = DATA.profiles[r.k];
-    const g = r.second ? p.secondOpinion : p.gadget;
-    const therapyNote = r.second
-      ? "Il secondo medico ha parlato. Attenzione: il secondo medico è anche l'ultimo."
-      : g.note;
+    const g = p.gadget;
     return `<section class="screen">
       ${topbar("Referto")}
       ${r.stamped && !justStamped ? `<div class="notice stamped">Questo referto è già stato ritirato. Rifare il quiz non vale come nuova ricetta.</div>` : ""}
@@ -159,9 +156,9 @@
           <div><dt>Consiglio di sopravvivenza</dt><dd>${esc(p.tip)}</dd></div>
         </dl>
         <div class="therapy">
-          <span class="k">Terapia prescritta${r.second ? " · seconda opinione" : ""}</span>
+          <span class="k">Terapia prescritta</span>
           <b>${esc(g.name)}</b>
-          ${therapyNote ? `<p>${esc(therapyNote)}</p>` : ""}
+          ${g.note ? `<p>${esc(g.note)}</p>` : ""}
         </div>
         <div class="sign"><span>Firmato: il medico di turno</span><span>Make sense with wethod.</span></div>
         ${r.stamped ? `<div class="stamp" aria-label="Ritirato">Ritirato</div>` : ""}
@@ -169,13 +166,7 @@
 
       ${r.stamped
         ? `<div class="notice">Ritirato. Terapia consegnata, paziente in via di guarigione.</div>`
-        : `<div class="pharmacy">
-            <p>Mostra questo referto in farmacia (è il banco qui a fianco).</p>
-            ${r.second ? "" : `<button class="btn btn-line" data-act="second">Chiedi una seconda opinione</button>`}
-            <div id="staffArea">
-              <button class="btn btn-ghost" data-act="staff">Timbro della farmacia · solo staff</button>
-            </div>
-          </div>`}
+        : `<button class="btn btn-stamp" data-act="stamp">Terapia ritirata. Timbra il referto</button>`}
 
       <div class="intensive">
         <span class="k">Terapia intensiva</span>
@@ -220,7 +211,6 @@
       num: String(rand(1, 9999)).padStart(4, "0"),
       tired: rand(p.tiredness[0], p.tiredness[1]),
       coffee: rand(p.coffee[0], p.coffee[1]),
-      second: false,
       stamped: false,
     };
   }
@@ -231,19 +221,6 @@
     save();
     app.innerHTML = viewLoading("Sto chiedendo un parere al cliente… no, meglio di no.");
     setTimeout(() => { render(); window.scrollTo(0, 0); }, 1800);
-  }
-
-  function showStaffConfirm() {
-    const area = document.getElementById("staffArea");
-    const p = DATA.profiles[S.result.k];
-    const g = S.result.second ? p.secondOpinion : p.gadget;
-    area.innerHTML = `<div class="staff-confirm">
-      <p>Consegni ${esc(g.name)}?</p>
-      <div class="row">
-        <button class="btn btn-line" data-act="staffCancel">Annulla</button>
-        <button class="btn btn-stamp" data-act="stamp">Timbra</button>
-      </div>
-    </div>`;
   }
 
   // ---------- Render & events ----------
@@ -292,9 +269,6 @@
         else finishQuiz();
         break;
       case "prev": S.q = Math.max(0, S.q - 1); go("question"); break;
-      case "second": S.result.second = true; save(); render(); break;
-      case "staff": showStaffConfirm(); break;
-      case "staffCancel": render(); break;
       case "stamp": S.result.stamped = true; justStamped = true; save(); render(); window.scrollTo(0, 0); break;
     }
   });

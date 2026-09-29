@@ -128,11 +128,6 @@ input[type="text"]:focus { border-color: var(--blue); outline: none; }
 
 .notice { background: var(--card); border-radius: 14px; padding: 14px 16px; font-size: 15px; }
 .notice.stamped { border: 1.5px solid var(--stamp); color: var(--stamp); }
-.pharmacy { display: grid; gap: 10px; background: var(--card); border-radius: 16px; padding: 16px; }
-.pharmacy p { font-size: 15px; }
-.staff-confirm { display: grid; gap: 8px; padding-top: 10px; border-top: 1px dashed var(--line); }
-.staff-confirm p { font-weight: 600; }
-.staff-confirm .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .btn-stamp { background: var(--stamp); color: var(--ivory); }
 
 .intensive { background: var(--blue); color: var(--ivory); border-radius: 16px; padding: 20px; display: grid; gap: 10px; }
