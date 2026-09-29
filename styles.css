@@ -57,8 +57,11 @@ button { font: inherit; color: inherit; }
 .start h1 { font-size: clamp(46px, 13vw, 64px); letter-spacing: -.02em; }
 .start h1 em { font-style: normal; font-weight: 200; display: block; }
 .start .lead { font-size: 19px; }
-.start .facts { display: flex; flex-wrap: wrap; gap: 4px 10px; color: var(--ink-2); font-size: 15px; }
-.start .facts span + span::before { content: "·"; margin-right: 10px; }
+.start .facts { display: flex; flex-wrap: wrap; gap: 4px 8px; color: var(--ink-2); font-size: 14px; }
+.start .facts span { white-space: nowrap; }
+.start .facts span:not(:last-child)::after { content: "·"; margin-left: 8px; }
+/* Sui telefoni più stretti la riga va a capo: senza puntini, così nessuna riga inizia o finisce con "·". */
+@media (max-width: 359px) { .start .facts { column-gap: 16px; } .start .facts span::after { display: none; } }
 
 /* Form */
 .field { display: grid; gap: 8px; }
