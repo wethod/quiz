@@ -105,9 +105,7 @@
   }
 
   function progressText(n, total) {
-    if (n === total) return "Ultima. Davvero ultima. Non come le revisioni.";
-    const left = total - n;
-    return `Domanda ${n} di ${total}. ${left === 1 ? "Manca solo 1 revisione." : `Mancano solo ${left} revisioni.`}`;
+    return `Domanda ${n} di ${total}.`;
   }
 
   function viewQuestion() {
