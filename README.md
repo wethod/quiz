@@ -38,7 +38,7 @@ Per puntare a un altro indirizzo: `cartello.html?url=https://...` o il campo in 
 2. Dopo 6 domande riceve il referto con la terapia (il gadget).
 3. Al banco si tocca **"Terapia ritirata. Timbra il referto"**. Il referto diventa "Ritirato"
    e resta così anche se si ricarica la pagina o si riapre il link.
-4. Chi prenota la demo dal referto riceve la felpa (verifica a voce/su schermo al banco).
+4. Dal referto si può prenotare una demo (link "Prenota la demo").
 
 **Reset** (per provare o per un dispositivo condiviso): tieni premuto il logo per 3 secondi,
 oppure apri l'indirizzo con `?reset` in fondo (es. `.../index.html?reset`).
@@ -47,7 +47,7 @@ oppure apri l'indirizzo con `?reset` in fondo (es. `.../index.html?reset`).
 
 Tutto è in `data.js`:
 
-- `profiles`: gli 8 profili (chiavi D, F, T, X, C, B, S, P) con sintomi, nonsense, fasce di stanchezza e caffè, consiglio, gadget e seconda opinione.
+- `profiles`: gli 8 profili (chiavi D, F, T, X, C, B, S, P) con sintomi, nonsense, fasce di stanchezza e caffè, consiglio e gadget.
 - `quizzes`: i 4 quiz (ne viene estratto uno a caso). Ogni risposta ha `profiles`, due lettere = i due profili che prendono un punto.
   Per mantenere il bilanciamento, in ogni domanda ciascuna delle 8 lettere deve comparire una sola volta.
 - `demoUrl`: il link della terapia intensiva.
