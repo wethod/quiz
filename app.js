@@ -170,7 +170,7 @@
 
       <div class="intensive">
         <span class="k">Terapia intensiva</span>
-        <h3>Prenota una demo e scegli una felpa.</h3>
+        <h3>Prenota una demo.</h3>
         <p>Nessun effetto collaterale, solo senso.</p>
         <a class="btn" href="${esc(DATA.demoUrl)}" target="_blank" rel="noopener">Prenota la demo</a>
       </div>
