@@ -38,7 +38,7 @@
   const shuffle = (arr) => { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
   const cw = (k) => { const c = DATA.profiles[k].colorway; return `--cw-l:var(--${c}-l);--cw-d:var(--${c}-d)`; };
 
-  const topbar = (right) => `<div class="topbar"><img class="logo" id="logo" src="assets/logo.svg" alt="wethod" draggable="false"><span class="eyebrow">${right || "Supernova Agencies"}</span></div>`;
+  const topbar = (right) => `<div class="topbar"><img class="logo" id="logo" src="assets/logo.svg" alt="wethod" draggable="false">${right ? `<span class="eyebrow">${right}</span>` : ""}</div>`;
 
   function bindLogo() {
     const logo = document.getElementById("logo");
