@@ -199,7 +199,7 @@
     S.q = 0;
     S.step = "loading";
     save();
-    app.innerHTML = viewLoading("Sto aprendo FINAL_definitivo_v9.pdf…");
+    app.innerHTML = viewLoading("Accomodati, il dottore ti riceve tra un attimo…");
     setTimeout(() => go("question"), 1300);
   }
 
