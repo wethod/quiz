@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cartello stand · Qual è il tuo nonsense?</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    @page { size: A4 portrait; margin: 0; }
+    body { padding: 0; background: #e3edff; }
+    .poster { width: 210mm; height: 297mm; margin: 0 auto; padding: 22mm 20mm; display: flex; flex-direction: column; gap: 14mm; background: #e3edff; }
+    .poster .logo { height: 11mm; }
+    .poster h1 { font-size: 30mm; line-height: .95; letter-spacing: -.02em; }
+    .poster h1 em { font-style: normal; font-weight: 200; display: block; }
+    .poster .lead { font-size: 8mm; line-height: 1.25; max-width: 150mm; }
+    .qrbox { display: flex; gap: 10mm; align-items: flex-end; margin-top: auto; }
+    #qr { background: #fff; padding: 6mm; border-radius: 6mm; width: 76mm; height: 76mm; }
+    #qr img, #qr canvas { width: 100% !important; height: 100% !important; display: block; }
+    .steps { display: grid; gap: 4mm; font-size: 6mm; line-height: 1.25; }
+    .steps b { font-weight: 600; color: #2762e5; }
+    .url { font-size: 4mm; color: #6d6d6d; word-break: break-all; }
+    .tools { max-width: 210mm; margin: 12px auto; padding: 0 16px; display: flex; gap: 8px; font-size: 14px; flex-wrap: wrap; }
+    .tools input { flex: 1; min-width: 200px; font: inherit; padding: 8px 10px; border: 1px solid #bbb; border-radius: 8px; }
+    .tools button { font: inherit; padding: 8px 14px; border: 0; border-radius: 8px; background: #2762e5; color: #fff; cursor: pointer; }
+    @media print { .tools { display: none; } .poster { margin: 0; } }
+    @media screen and (max-width: 820px) { .poster { transform-origin: top left; zoom: .45; } }
+  </style>
+</head>
+<body>
+  <div class="tools">
+    <input id="url" aria-label="Indirizzo del quiz">
+    <button id="apply">Aggiorna QR</button>
+    <button onclick="window.print()">Stampa</button>
+  </div>
+  <div class="poster">
+    <img class="logo" src="assets/logo.svg" alt="wethod">
+    <h1>Qual è il tuo <em>nonsense?</em></h1>
+    <p class="lead">Sei domande sulla vita in agenzia. Ci vogliono 90 secondi, meno di una call.</p>
+    <div class="qrbox">
+      <div id="qr"></div>
+      <div class="steps">
+        <span><b>1.</b> Inquadra il QR</span>
+        <span><b>2.</b> Scopri il tuo referto</span>
+        <span><b>3.</b> Ritira la terapia al banco</span>
+        <span class="url" id="urlText"></span>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+    // Di default il QR punta a index.html nella stessa cartella. Si può forzare con ?url=https://...
+    const param = new URLSearchParams(location.search).get("url");
+    const base = param || new URL("./", location.href).href;
+    const input = document.getElementById("url");
+    input.value = base;
+    function draw(u) {
+      const box = document.getElementById("qr");
+      box.innerHTML = "";
+      new QRCode(box, { text: u, width: 600, height: 600, colorDark: "#1a1a1a", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.M });
+      document.getElementById("urlText").textContent = u.replace(/^https?:\/\//, "");
+    }
+    document.getElementById("apply").addEventListener("click", () => draw(input.value.trim()));
+    draw(base);
+  </script>
+</body>
+</html>
