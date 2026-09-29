@@ -146,6 +146,11 @@
           <div class="dx">Diagnosi</div>
           <h2><span class="emo" aria-hidden="true">${p.emoji}</span>${esc(p.name)}</h2>
         </div>
+        <div class="therapy">
+          <span class="k">Terapia prescritta</span>
+          <b>${esc(g.name)}</b>
+          ${g.note ? `<p>${esc(g.note)}</p>` : ""}
+        </div>
         <dl>
           <div><dt>Sintomi</dt><dd>${esc(p.symptoms)}</dd></div>
           <div><dt>Il tuo nonsense</dt><dd>${esc(p.nonsense)}</dd></div>
@@ -155,11 +160,6 @@
           </div>
           <div><dt>Consiglio di sopravvivenza</dt><dd>${esc(p.tip)}</dd></div>
         </dl>
-        <div class="therapy">
-          <span class="k">Terapia prescritta</span>
-          <b>${esc(g.name)}</b>
-          ${g.note ? `<p>${esc(g.note)}</p>` : ""}
-        </div>
         <div class="sign"><span>Firmato: il medico di turno</span><span>Make sense with wethod.</span></div>
         ${r.stamped ? `<div class="stamp" aria-label="Ritirato">Ritirato</div>` : ""}
       </article>
