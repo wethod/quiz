@@ -82,19 +82,7 @@
       <div class="field"><span class="label">Di cosa ti occupi?</span><div class="pills">${pills(ROLES, "role")}</div></div>
       <div class="field"><span class="label">Usi già wethod?</span><div class="pills">${pills(CLIENT, "client")}</div></div>
       <div class="actions">
-        <button class="btn btn-primary" data-act="toChoice" id="formNext" ${ok ? "" : "disabled"}>Avanti</button>
-      </div>
-    </section>`;
-  }
-
-  function viewChoice() {
-    const cards = DATA.quizzes.map((z, i) => `<button class="choice" data-quiz="${i}"><span class="l">${"ABCD"[i] || i + 1}</span><b>${esc(z.title)}</b><span>${esc(z.tagline)}</span></button>`).join("");
-    return `<section class="screen">
-      ${topbar("Scegli il turno")}
-      <h2 style="font-size:30px">Scegli il tuo turno</h2>
-      <div class="choices">
-        ${cards}
-        <button class="choice random" data-quiz="random"><span class="l">?</span><b>Decidi tu</b><span>Tanto decide sempre qualcun altro.</span></button>
+        <button class="btn btn-primary" data-act="startQuiz" id="formNext" ${ok ? "" : "disabled"}>Avanti</button>
       </div>
     </section>`;
   }
@@ -184,8 +172,9 @@
   }
 
   // ---------- Logic ----------
-  function startQuiz(choice) {
-    const idx = choice === "random" ? Math.floor(Math.random() * DATA.quizzes.length) : Number(choice);
+  // Il quiz lo scegliamo noi: tanto decide sempre qualcun altro.
+  function startQuiz() {
+    const idx = Math.floor(Math.random() * DATA.quizzes.length);
     S.quiz = idx;
     S.order = DATA.quizzes[idx].questions.map((q) => shuffle(q.answers.map((_, i) => i)));
     S.answers = [];
@@ -227,9 +216,9 @@
 
   // ---------- Render & events ----------
   function render() {
-    const views = { start: viewStart, form: viewForm, choice: viewChoice, question: viewQuestion, result: viewResult };
+    const views = { start: viewStart, form: viewForm, question: viewQuestion, result: viewResult };
     // Se si ricarica durante un caricamento, riprende dal punto giusto.
-    if (S.step === "loading") S.step = S.quiz != null ? "question" : "choice";
+    if (S.step === "loading") S.step = S.quiz != null ? "question" : "form";
     if (S.step === "result" && !S.result) S.step = "start";
     app.innerHTML = (views[S.step] || viewStart)();
     bindLogo();
@@ -244,7 +233,7 @@
   }
 
   app.addEventListener("click", (e) => {
-    const el = e.target.closest("[data-act],[data-pill],[data-quiz],[data-ans]");
+    const el = e.target.closest("[data-act],[data-pill],[data-ans]");
     if (!el) return;
 
     if (el.dataset.pill) {
@@ -254,7 +243,6 @@
       document.getElementById("formNext").disabled = !(S.name.trim() && S.role && S.client);
       return;
     }
-    if (el.dataset.quiz) { startQuiz(el.dataset.quiz); return; }
     if (el.dataset.ans) {
       S.answers[S.q] = Number(el.dataset.ans);
       save();
@@ -265,7 +253,7 @@
 
     switch (el.dataset.act) {
       case "begin": go(S.result ? "result" : "form"); break;
-      case "toChoice": go("choice"); break;
+      case "startQuiz": startQuiz(); break;
       case "next":
         if (S.q < DATA.quizzes[S.quiz].questions.length - 1) { S.q += 1; go("question"); }
         else finishQuiz();
