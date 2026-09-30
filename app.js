@@ -58,11 +58,11 @@
     return `<section class="screen start">
       ${topbar()}
       <div>
-        <p class="eyebrow">Reparto Agenzie · Ambulatorio wethod</p>
+        <p class="eyebrow">Il quiz di wethod per le agenzie</p>
       </div>
       <h1>Qual è il tuo <em>nonsense?</em></h1>
-      <p class="lead">Sei domande sulla vita in agenzia. Alla fine ti diamo un referto e una terapia da ritirare al banco.</p>
-      <div class="facts"><span>90 secondi</span><span>Meno di una call</span><span>Gadget incluso</span></div>
+      <p class="lead">Sei domande sulla vita in agenzia. Alla fine scopri il tuo nonsense e passi al nostro banco a ritirare il tuo merch.</p>
+      <div class="facts"><span>90 secondi</span><span>Meno di una call</span><span>Merch incluso</span></div>
       <div class="actions">
         <button class="btn btn-primary" data-act="begin">Anche questo quiz era per ieri. Inizia</button>
       </div>
@@ -73,9 +73,9 @@
     const pills = (list, key) => list.map((v) => `<button type="button" class="pill" data-pill="${key}" data-val="${esc(v)}" aria-pressed="${S[key] === v}">${esc(v)}</button>`).join("");
     const ok = S.name.trim() && S.role && S.client;
     return `<section class="screen">
-      ${topbar("Accettazione")}
+      ${topbar("Prima di iniziare")}
       <h2 style="font-size:30px">Prima la burocrazia. Giuro, è veloce.</h2>
-      <p class="form-note">Servono solo per il referto. Niente newsletter, promesso.</p>
+      <p class="form-note">Servono solo per il tuo risultato. Niente newsletter, promesso.</p>
       <div class="field">
         <label for="name">Come ti chiami?</label>
         <input type="text" id="name" maxlength="30" autocomplete="given-name" value="${esc(S.name)}" placeholder="Nome">
@@ -117,7 +117,7 @@
       <h2 class="qtitle">${esc(q.text)}</h2>
       <div class="answers${isEmoji ? " grid4" : ""}">${btns}</div>
       <div class="actions">
-        <button class="btn btn-primary" data-act="next" ${chosen == null ? "disabled" : ""}>${last ? "Vedi il referto" : "Avanti (tanto il cliente cambierà idea)"}</button>
+        <button class="btn btn-primary" data-act="next" ${chosen == null ? "disabled" : ""}>${last ? "Scopri il tuo nonsense" : "Avanti (tanto il cliente cambierà idea)"}</button>
         ${S.q > 0 ? `<button class="btn btn-ghost" data-act="prev">Torna indietro</button>` : ""}
       </div>
     </section>`;
@@ -128,22 +128,22 @@
     const p = DATA.profiles[r.k];
     const g = p.gadget;
     return `<section class="screen">
-      ${topbar("Referto")}
-      ${r.stamped && !justStamped ? `<div class="notice stamped">Questo referto è già stato ritirato. Rifare il quiz non vale come nuova ricetta.</div>` : ""}
+      ${topbar("Il tuo nonsense")}
+      ${r.stamped && !justStamped ? `<div class="notice stamped">Questo merch è già stato ritirato. Rifare il quiz non vale come secondo giro.</div>` : ""}
       <article class="report" style="${cw(r.k)}">
         <div class="rh">
-          <div class="row"><span>Referto n. ${r.num}</span><span>Reparto Agenzie</span></div>
-          <div class="patient">Paziente: <b>${esc(S.name)}</b> · ${esc(S.role)}</div>
-          <div class="dx">Diagnosi</div>
+          <div class="row"><span>Nonsense n. ${r.num}</span><span>Agency edition</span></div>
+          <div class="patient"><b>${esc(S.name)}</b> · ${esc(S.role)}</div>
+          <div class="dx">Il tuo profilo</div>
           <h2><span class="emo" aria-hidden="true">${p.emoji}</span>${esc(p.name)}</h2>
         </div>
         <div class="therapy">
-          <span class="k">Terapia prescritta</span>
+          <span class="k">Il tuo merch</span>
           <b>${esc(g.name)}</b>
           ${g.note ? `<p>${esc(g.note)}</p>` : ""}
         </div>
         <dl>
-          <div><dt>Sintomi</dt><dd>${esc(p.symptoms)}</dd></div>
+          <div><dt>Come ti riconosci</dt><dd>${esc(p.symptoms)}</dd></div>
           <div><dt>Il tuo nonsense</dt><dd>${esc(p.nonsense)}</dd></div>
           <div class="stats">
             <div class="stat"><dt>Stanchezza</dt><dd><b>${r.tired}%</b><div class="meter"><i style="width:${r.tired}%"></i></div></dd></div>
@@ -151,18 +151,18 @@
           </div>
           <div><dt>Consiglio di sopravvivenza</dt><dd>${esc(p.tip)}</dd></div>
         </dl>
-        <div class="sign"><span>Firmato: il medico di turno</span><span>Make sense with wethod.</span></div>
+        <div class="sign"><span>Firmato: il team wethod</span><span>Make sense with wethod.</span></div>
         ${r.stamped ? `<div class="stamp" aria-label="Ritirato">Ritirato</div>` : ""}
       </article>
 
       ${r.stamped
-        ? `<div class="notice">Ritirato. Terapia consegnata, paziente in via di guarigione.</div>`
-        : `<button class="btn btn-stamp" data-act="stamp">Terapia ritirata. Timbra il referto</button>`}
+        ? `<div class="notice">Ritirato. Merch consegnato, un nonsense in meno.</div>`
+        : `<button class="btn btn-stamp" data-act="stamp">Merch ritirato. Metti il timbro</button>`}
 
       <div class="intensive">
-        <span class="k">Terapia intensiva</span>
+        <span class="k">Vuoi meno nonsense?</span>
         <h3>Prenota una demo.</h3>
-        <p>Nessun effetto collaterale, solo senso.</p>
+        <p>Ti mostriamo come wethod rimette ordine tra progetti, persone e margini.</p>
         <a class="btn" href="${esc(DATA.demoUrl)}" target="_blank" rel="noopener">Prenota la demo</a>
       </div>
 
@@ -182,7 +182,7 @@
     S.q = 0;
     S.step = "loading";
     save();
-    app.innerHTML = viewLoading("Accomodati, il dottore ti riceve tra un attimo…");
+    app.innerHTML = viewLoading("Mettiti comodo, il tuo nonsense sta arrivando…");
     setTimeout(() => go("question"), 1300);
   }
 
@@ -271,7 +271,7 @@
     }
   });
 
-  // Chi ha già un referto non ricomincia da capo: torna al referto.
+  // Chi ha già un risultato non ricomincia da capo: torna al risultato.
   if (S.result && S.step !== "result") S.step = "result";
   render();
 })();
