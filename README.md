@@ -3,7 +3,7 @@
 ## Evento concluso — landing attiva
 
 `index.html` mostra solo il ringraziamento per Supernova Agencies 2026 e il box
-per prenotare una demo su https://www.wethod.com/supernova2026, con lo stile originale.
+per prenotare una demo su https://www.wethod.com/prenota-la-tua-demo, con lo stile originale.
 La landing non carica JavaScript e non legge né modifica le partite salvate.
 `app.js` e `data.js` sono conservati integralmente, ma non vengono caricati.
 `cartello.html` rimanda alla landing; il cartello originale è conservato in un
