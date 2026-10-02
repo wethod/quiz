@@ -2,6 +2,7 @@
 <html lang="it">
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="refresh" content="0; url=./">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cartello stand · Qual è il tuo nonsense?</title>
   <link rel="stylesheet" href="styles.css">
@@ -27,6 +28,9 @@
   </style>
 </head>
 <body>
+  <p>L'evento è terminato. <a href="./">Vai alla pagina di Supernova Agencies 2026</a>.</p>
+  <!-- Cartello originale conservato ma disabilitato. -->
+  <template id="archived-poster">
   <div class="tools">
     <input id="url" aria-label="Indirizzo del quiz">
     <button id="apply">Aggiorna QR</button>
@@ -62,5 +66,6 @@
     document.getElementById("apply").addEventListener("click", () => draw(input.value.trim()));
     draw(base);
   </script>
+  </template>
 </body>
 </html>

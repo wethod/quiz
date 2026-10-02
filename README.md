@@ -1,5 +1,20 @@
 # Qual è il tuo nonsense? — quiz stand wethod, Supernova Agencies 5
 
+## Evento concluso — landing attiva
+
+`index.html` mostra solo il ringraziamento per Supernova Agencies 2026 e il box
+per prenotare una demo su https://www.wethod.com/supernova2026, con lo stile originale.
+La landing non carica JavaScript e non legge né modifica le partite salvate.
+`app.js` e `data.js` sono conservati integralmente, ma non vengono caricati.
+`cartello.html` rimanda alla landing; il cartello originale è conservato in un
+`template` inerte.
+
+Per riattivare il quiz, svuotare il contenuto di `#app` in `index.html` e
+decommentare i due script in fondo, nell'ordine `data.js`, `app.js`.
+Per riattivare anche il cartello, rimuovere il meta refresh e il messaggio di
+rimando, poi rimuovere i tag di apertura e chiusura del `template`.
+Le istruzioni che seguono descrivono il quiz originale, attualmente disabilitato.
+
 Web app statica: nessun server, nessun build, nessun dato inviato da nessuna parte.
 Lo stato di ogni partita resta nel browser di chi gioca (localStorage).
 

@@ -132,3 +132,8 @@ input[type="text"]:focus { border-color: var(--blue); outline: none; }
 .end p { color: var(--ink-2); font-size: 15px; }
 .end b { font-weight: 600; }
 .pointer { cursor: pointer; }
+
+/* Landing dopo Supernova Agencies 2026 */
+.farewell h1 { font-size: clamp(26px, 6.5vw, 36px); }
+.farewell h1 a { color: var(--blue); text-decoration-thickness: 2px; text-underline-offset: .1em; }
+.farewell .intensive h2 { font-size: 22px; }
